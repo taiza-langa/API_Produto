@@ -37,9 +37,10 @@ public class PedidoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(novoPedido);
     }
 
-    @PostMapping("/pedidos/{pedidoId}/itens")
+    @PostMapping("/pedidos/{pedidoId}/itens/{produtoId}")
     public ResponseEntity<?> adicionarItem(
             @PathVariable Long pedidoId,
+            @PathVariable Long produtoId,
             @RequestBody ItemPedido item) {
 
         Pedido pedido = pedidoRepository.findById(pedidoId).orElse(null);
@@ -47,8 +48,6 @@ public class PedidoController {
         if (pedido == null) {
             return ResponseEntity.notFound().build();
         }
-
-        Long produtoId = item.getProduto().getId();
 
         Produto produto = produtoRepository.findById(produtoId).orElse(null);
 

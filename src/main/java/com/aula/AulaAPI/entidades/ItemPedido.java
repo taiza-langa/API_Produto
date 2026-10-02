@@ -17,9 +17,8 @@ public class ItemPedido {
 
     @ManyToOne
     private Produto produto;
-
     private int quantidade;
-
+    
     @JsonIgnore
     @ManyToOne
     private Pedido pedido;
